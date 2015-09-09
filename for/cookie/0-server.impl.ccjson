@@ -1,0 +1,11 @@
+{
+    "$": "./0-server.ccjson.js",
+    "cookie": {
+        "name": "0_INVITE_TOKEN",
+        "maxAge": 31536000
+    },
+    "query": {
+        "name": "invite"
+ 
+    }
+}
