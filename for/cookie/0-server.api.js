@@ -21,6 +21,16 @@ exports.app = function (options) {
 				req.cookies.set(options.cookie.name, "");
 			}
 		}
-		return next();
+
+		if (req.context.boundary.canBypass()) {
+			return next();
+		}
+
+		if (req.cookies.get(options.cookie.name)) {
+			return next();
+		}
+
+		res.writeHead(403);
+		return res.end("Forbidden: You need an invite!");
     };
 }
