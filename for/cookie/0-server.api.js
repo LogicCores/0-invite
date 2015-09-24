@@ -22,7 +22,7 @@ exports.app = function (options) {
 			}
 		}
 
-		if (req.context.boundary.canBypass()) {
+		if (req.state.boundary.canBypass()) {
 			return next();
 		}
 
