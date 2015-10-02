@@ -9,6 +9,7 @@ exports.app = function (options) {
         req.cookies = new COOKIES(req, res);
 
 		// Enable or disable test mode.
+		var freshlyAuthorized = false;
 		if (
 			req.query &&
 			req.query[options.query.name]
@@ -17,6 +18,7 @@ exports.app = function (options) {
 				req.cookies.set(options.cookie.name, options.token, {
 				    maxAge: (options.cookie.maxAge && (options.cookie.maxAge * 1000)) || 0
 				});
+				freshlyAuthorized = true;
 			} else {
 				req.cookies.set(options.cookie.name, "");
 			}
@@ -26,7 +28,10 @@ exports.app = function (options) {
 			return next();
 		}
 
-		if (req.cookies.get(options.cookie.name)) {
+		if (
+			req.cookies.get(options.cookie.name) === options.token ||
+			freshlyAuthorized === true
+		) {
 			return next();
 		}
 
