@@ -59,6 +59,13 @@ exports.forLib = function (LIB) {
                                     }
                                 )
                             );
+                        },
+                        getInfo: function () {
+                            return LIB.Promise.resolve({
+                                "type": "query",
+                                "name": config.query.name,
+                                "value": config.token
+                            });
                         }
 /*
                         },
