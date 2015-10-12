@@ -12,6 +12,7 @@ exports.forLib = function (LIB) {
                 var config = {};
                 LIB._.merge(config, defaultConfig)
                 LIB._.merge(config, instanceConfig)
+                config = ccjson.attachDetachedFunctions(config);
 
                 // TODO: Remove once we can generate access tokens from cli dynamically
                 var url = "?" + config.query.name + "=" + config.token;
