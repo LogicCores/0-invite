@@ -43,8 +43,12 @@ exports.forLib = function (LIB) {
                                 				req.cookies.set(config.cookie.name, "");
                                 			}
                                 		}
-                                
-                                		if (req.state.boundary.canBypass()) {
+
+                                        if (config.forceInvited === true) {
+                                			return next();
+                                        }
+
+                                		if (req.state.boundary.hasBypassHeader()) {
                                 			return next();
                                 		}
                                 
